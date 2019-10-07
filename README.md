@@ -1,4 +1,9 @@
-# Webpack Frontend Starterkit
+# Calorie Tracker
+
+
+A README contains sections such as Introduction, Initial Setup, How to Use, Known Issues, Running Tests, How to Contribute, Core Contributors, Schema Design, and Tech Stack List.
+
+
 
 [![Dependabot badge](https://flat.badgen.net/dependabot/wbkd/webpack-starter?icon=dependabot)](https://dependabot.com/)
 
