@@ -1,5 +1,12 @@
 language: node_js
 node_js:
-  - "lts/*"
-  - "node"
+- lts/*
+- node
 script: npm run build
+deploy:
+  provider: heroku
+  api_key:
+    secure: D2HDVhtggOACuK8nU+1RO5lvg2vmcdNMKti6O4KuLFs6s/qD0mav+QTmk+Y+H0wCFdQc8qYwbeBX661PhyUtZxA38+frCv9qvjphbmRcNmV4IxDWTPdDoEvJb0iyCQtQXtgZQY9IXsTb9bkyN9XDFo9G2wlc5QhTekcZBXTlptYs+py/W0qlw9K3gYIJsIwSopGY0JQ+wEbfzB++0ShsDVw3o6o+mKz08WfTCZMqG0F5EgjnqtalW6aKZZ97LsAVWW9jyuLaEOR3JIwMfYFwj9UWDsy8c8GRJ2BtCpF5psTSsU5XKxLM9AEiZmnOjejNX/w18YgukpeHVDGMR3uIBYhNWsjD5Hju7fwKG9JPKQNzoz6ZOekpe4dklywx/ZB9Lg4YpFGABRT9s01D4vQI8n/ckwtwKZKxwDNmHVHai7YB5H+7LG6TquiFglGrscNA/8MsuDNIc839gVIuFNHZ9uW8h6oSs2neOd8++ODOTGNe3ArIhcYesgcqfYMkMSGKgbccj5JHXPXClKzo51YkgyfHs2NYDvXgCbOQ9SZAPWfBN13ZFc8n1VIR5sVVzIu53/MIHCgWP48Sq6xutY/A8J9JOfuCwCVEU5DNAi/X/5CBxbLqf+QO56mvE1MqAsRIQNhR0WZ4BuHNARLAaSVDbWR9D9Uy7UzX94VUJldO5Vw=
+  app: calorie-tracker
+  on:
+    repo: calorie-tracker-js
