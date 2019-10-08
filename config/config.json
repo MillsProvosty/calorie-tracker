@@ -1,0 +1,23 @@
+{
+  "development": {
+    "password": null,
+    "database": "calorie_tracker_development",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "operatorsAliases": false
+  },
+  "test": {
+    "password": null,
+    "database": "calorie_tracker_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "operatorsAliases": false
+  },
+  "production": {
+    "password": null,
+    "database": "calorie_tracker_production",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "operatorsAliases": false
+  }
+}
