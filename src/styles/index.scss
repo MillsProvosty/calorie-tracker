@@ -1,35 +1,32 @@
-$body-color: slateblue;
-
 body {
-  color: $body-color;
-  font-family: sans-serif;
-  background-color: #e6e5e3;
+  color: #C042E6;
+  font-family: papyrus;
+  background-color: #E7C2F3;
 }
 
-.panelleft {
-  align: center;
-  width: 42%;
-  float: left;
-  position: relative;
-  display: block;
+.panel {
+  // align: center;
+  // position: relative;
+  // display: block;
   padding: 10px;
-  margin-bottom: 10px;
-  margin-left: 10px;
   text-align: center;
-  background-color: #cfcecc;
-  box-shadow: 0 0 1px #000;
+  background-color: #17F6EE;
+  box-shadow: 0 0 19px #000;
  }
 
-.panelright {
-  align: center;
+.left {
+  width: 42%;
+  float: left;
+  margin-left: 20px;
+ }
+
+.right {
   width: 42%;
   float: right;
-  position: relative;
-  display: block;
-  padding: 10px;
-  margin-bottom: 10px;
-  margin-right: 10px;
-  text-align: center;
-  background-color: #cfcecc;
-  box-shadow: 0 0 1px #000;
+  margin-right: 20px;
+ }
+
+ .center {
+   width: 90%;
+   margin: auto;
  }
