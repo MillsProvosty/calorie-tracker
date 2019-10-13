@@ -1,27 +1,24 @@
 $(document).ready(function() {
   var foods = function() {
     $("#foods").empty()
-    console.log('HELLO, HOUSTON?')
-    $.ajax({
-      type: "Get",
-      dataType: 'jsonp',
-      contentType: "application/json; charset=utf-8",
-      url: "https://calorie-tracker-be.herokuapp.com/api/v1/foods",
 
-      success: function (foodResults) {
-        $.each (foodResults, function (index) {
-          var start = `<div class='entry' style='margin: 10px;'>\n`
-          var item = `<p>${foodResults[index]}</p>`
-          var close = `</div>`
-          $("#foods").append(start + item + close)
-        })
-      },
-
-      error: function (error) {
-        console.log('HOUSTON, WE HAVE A PROBLEM.')
-        alert('Error!');
+    fetch('https://calorie-tracker-be.herokuapp.com/api/v1/foods', {
+      method: 'get',
+      headers: {
+        "Content-Type": "application/json"
       }
     })
+    .then(response => response.json())
+    .then(response => {
+      $.each (response, function (index) {
+        var start = `<div class='entry' style='margin: 10px;'>\n`
+        var item = `<h2>${response[index].name}</h2>`
+        var cals = `<li>Cals: ${response[index].calories}</li>`
+        var close = `</div>`
+        $("#foods").append(start + item + cals + close)
+      })
+    })
+    .catch(error => console.log(error))
   }
 
   foods();
