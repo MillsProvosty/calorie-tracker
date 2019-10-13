@@ -1,32 +1,53 @@
-body {
+html, body {
+  height: 100%;
   color: #C042E6;
   font-family: papyrus;
   background-color: #E7C2F3;
 }
 
-.panel {
+.title {
+  text-align: center;
+}
+
+.title, .index {
   // align: center;
   // position: relative;
   // display: block;
   padding: 10px;
-  text-align: center;
   background-color: #17F6EE;
   box-shadow: 0 0 19px #000;
  }
 
 .left {
+  height: 100%;
   width: 42%;
   float: left;
   margin-left: 20px;
  }
 
 .right {
+  height: 100%;
   width: 42%;
   float: right;
   margin-right: 20px;
  }
 
  .center {
+   width: 90%;
+   margin: auto;
+ }
+
+ .index {
+   height: 500px;
+   overflow-y: auto;
+ }
+
+ .entry {
+   padding-left: 20px;
+   padding-top: 1px;
+   padding-bottom: 10px;
+   background-color: #FCFEB0;
+   box-shadow: 0 0 5px #000;
    width: 90%;
    margin: auto;
  }

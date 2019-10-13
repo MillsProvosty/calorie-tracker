@@ -1,19 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Calorie Tracker</title>
+  <script language="JavaScript" type="text/javascript" src="/js/jquery-1.2.6.min.js"></script>
+  <script language="JavaScript" type="text/javascript" src="/js/jquery-ui-personalized-1.5.2.packed.js"></script>
+  <script language="JavaScript" type="text/javascript" src="/js/sprinkle.js"></script>
+  <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 </head>
+
 <body>
-  <div>
-    <h1 class='panel center' style='margin-bottom: 15px; margin-top: 20px;'> ✨🍾 Meal Prep for Backenders 🥂✨</h1>
+  <div class='center' style='margin-bottom: 15px; margin-top: 20px;'>
+    <h1 class='title'> ✨🍾 Meal Prep for Backenders 🥂✨</h1>
   </div>
 
-  <div>
-    <h1 class='panel left'> ✨ 🍹 All Foods  🍒🍳🧀</h1>
+  <div class='left'>
+    <h1 class='title'> ✨ 🍹 All Foods  🍒🍳🧀</h1>
+
+    <div class='index' style='margin-top: 25px;'>
+      <div id='foods'>
+        <script src="./src/scripts/foods.js"></script>
+      </div>
+    </div>
   </div>
 
-  <h1 class='panel right'> 🍣🌮🍱  All Meals 🍻 ✨</h1>
+  <div class='right'>
+    <h1 class='title'> 🍣🌮🍱  All Meals 🍻 ✨</h1>
+
+    <div class='index' style='margin-top: 25px;'>
+      <div class='entry' style='margin: 10px;'>
+        <p>I'm a happy cookie</p>
+      </div>
+
+      <div class='entry' style='margin: 10px;'>
+        <p>I'm a happy taco</p>
+      </div>
+
+      <script src="./scripts/foods.js">
+
+      </script>
+    </div>
+  </div>
 </body>
+
 </html>
