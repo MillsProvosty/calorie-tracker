@@ -10,9 +10,6 @@ html, body {
 }
 
 .title, .index {
-  // align: center;
-  // position: relative;
-  // display: block;
   padding: 10px;
   background-color: #17F6EE;
   box-shadow: 0 0 19px #000;
@@ -51,3 +48,7 @@ html, body {
    width: 90%;
    margin: auto;
  }
+
+a {
+  color: #C042E6;
+}
