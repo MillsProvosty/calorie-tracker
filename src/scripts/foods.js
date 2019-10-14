@@ -33,6 +33,10 @@ $(document).ready(function() {
 					let deleteBtn = '<button type="button" id="delete-food">Delete</button>'
 					let editBtn = '<button type="button" id="edit-food">Edit</button>'
 					$('#foods').empty().append(start + item + cals + backBtn + editBtn + deleteBtn + close)
+
+          $("#foods-index").on("click", function() {
+						foods();
+					});
         })
         .catch(error => console.log(error))
       })
