@@ -1,4 +1,7 @@
 $(document).ready(function() {
+  var start = `<div class='entry' style='margin: 10px;'>\n`
+  var close = `</div>`
+
   var foods = function() {
     $("#foods").empty()
 
@@ -9,12 +12,18 @@ $(document).ready(function() {
     .then(response => response.json())
     .then(response => {
       $.each (response, function (index) {
-        let start = `<div class='entry' style='margin: 10px;'>\n`
         let link = `<h2><a class='food-show' id='${'food-'+response[index].id}' href='javascript:;'>`
         let item = `${response[index].name}</a></h2>`
         let cals = `<li>Cals: ${response[index].calories}</li>`
-        let close = `</div>`
         $("#foods").append(start + link + item + cals + close)
+      })
+      let newBtn = '<button id="new-food">New</button>'
+      $('#foods').append(newBtn)
+
+      $(".new-food").on("click", function() {
+        // let name = document.createElement("name");
+        // var calories = document.createElement("calories");
+        newFood();
       })
 
       $(".food-show").on("click", function() {
@@ -25,13 +34,11 @@ $(document).ready(function() {
         })
         .then(response => response.json())
         .then(response => {
-          let start = `<div class='entry' style='margin: 10px;'>\n`
 					let item = `<h2>${response.name}</h2>\n`
 					let cals = `<li>Cals: ${response.calories}</li>`
-          let close = `</div>`
-					let backBtn = '<button type="button" id="foods-index">Back</button>'
-					let deleteBtn = '<button type="button" id="delete-food">Delete</button>'
-					let editBtn = '<button type="button" id="edit-food">Edit</button>'
+					let backBtn = '<button id="foods-index">Back</button>'
+					let deleteBtn = '<button id="delete-food">Delete</button>'
+					let editBtn = '<button id="edit-food">Edit</button>'
 					$('#foods').empty().append(start + item + cals + backBtn + editBtn + deleteBtn + close)
 
           $("#foods-index").on("click", function() {
@@ -45,4 +52,9 @@ $(document).ready(function() {
   }
 
   foods();
+
+  var newFood = function() {
+    $('#foods').empty().append('<div></div>');
+  }
+
 })
