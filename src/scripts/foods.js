@@ -1,6 +1,7 @@
 $(document).ready(function() {
   var start = `<div class='entry' style='margin: 10px;'>\n`
   var close = `</div>`
+  var backBtn = '<button id="foods-index">Back</button>'
 
   var foods = function() {
     $("#foods").empty()
@@ -11,19 +12,38 @@ $(document).ready(function() {
     })
     .then(response => response.json())
     .then(response => {
+      $('#foods').append('<button class="new-food">New</button>');
       $.each (response, function (index) {
-        let link = `<h2><a class='food-show' id='${'food-'+response[index].id}' href='javascript:;'>`
-        let item = `${response[index].name}</a></h2>`
-        let cals = `<li>Cals: ${response[index].calories}</li>`
-        $("#foods").append(start + link + item + cals + close)
+        let link = `<h2><a class='food-show' id='${'food-'+response[index].id}' href='javascript:;'>`;
+        let item = `${response[index].name}</a></h2>`;
+        let cals = `<li>Cals: ${response[index].calories}</li>`;
+        $("#foods").append(start + link + item + cals + close);
       })
-      let newBtn = '<button id="new-food">New</button>'
-      $('#foods').append(newBtn)
 
       $(".new-food").on("click", function() {
-        // let name = document.createElement("name");
-        // var calories = document.createElement("calories");
-        newFood();
+        let form = `<h3>Add a new Food</h3>
+          					<form id='submit-new-food'>
+            					Name: <input type='text' name='Name'><br>
+            					Calories: <input type='text' name='Calories'>
+          						<input type='submit' value='Submit'><br>
+          					</form>`
+        $('#foods').empty().append(start + form + close + backBtn)
+
+        $('#submit-new-food').submit(function(evnt) {
+          evnt.preventDefault();
+          input = $(this).serialize().split('&');
+      		var body = { food: { name: input[0].split("=")[1],
+      			                   calories: input[1].split("=")[1] } }
+          fetch('https://calorie-tracker-be.herokuapp.com/api/v1/foods', {
+            method: 'post',
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(body)
+          })
+          .then(() => foods())
+          .catch(error => console.log(error))
+        })
+
+        $("#foods-index").on("click", function() { foods(); });
       })
 
       $(".food-show").on("click", function() {
@@ -36,25 +56,16 @@ $(document).ready(function() {
         .then(response => {
 					let item = `<h2>${response.name}</h2>\n`
 					let cals = `<li>Cals: ${response.calories}</li>`
-					let backBtn = '<button id="foods-index">Back</button>'
 					let deleteBtn = '<button id="delete-food">Delete</button>'
 					let editBtn = '<button id="edit-food">Edit</button>'
-					$('#foods').empty().append(start + item + cals + backBtn + editBtn + deleteBtn + close)
+					$('#foods').empty().append(start + item + cals + close + backBtn + editBtn + deleteBtn)
 
-          $("#foods-index").on("click", function() {
-						foods();
-					});
+          $("#foods-index").on("click", function() { foods(); });
         })
         .catch(error => console.log(error))
       })
     })
     .catch(error => console.log(error))
   }
-
   foods();
-
-  var newFood = function() {
-    $('#foods').empty().append('<div></div>');
-  }
-
 })
