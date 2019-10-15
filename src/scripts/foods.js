@@ -45,31 +45,30 @@ $(document).ready(function() {
 
         $("#foods-index").on("click", function() { foods(); });
       })
-      $(".delete-food").on("click", function() {
-        let id = $(this).attr('id').split('-')[1];
-        fetch(`https://calorie-tracker-be.herokuapp.com/api/v1/foods/${id}`, {
-          method: 'delete',
-          headers: {"Content-Type": "application/json"}
-        })
-        .then(response => response.json())
-        .catch(error => console.log(error))
-      })
 
       $(".food-show").on("click", function() {
-        let id = $(this).attr('id').split('-')[1];
+        var id = $(this).attr('id').split('-')[1];
         fetch(`https://calorie-tracker-be.herokuapp.com/api/v1/foods/${id}`, {
           method: 'get',
           headers: {"Content-Type": "application/json"}
         })
-        .then(response => response.json())
+        .then((response) => response.json())
         .then(response => {
 					let item = `<h2>${response.name}</h2>\n`
 					let cals = `<li>Cals: ${response.calories}</li>`
 					let deleteBtn = '<button id="delete-food">Delete</button>'
 					let editBtn = '<button id="edit-food">Edit</button>'
 					$('#foods').empty().append(start + item + cals + close + backBtn + editBtn + deleteBtn)
-          
+
           $("#foods-index").on("click", function() { foods(); });
+          $("#delete-food").on("click", function() {
+            fetch(`https://calorie-tracker-be.herokuapp.com/api/v1/foods/${id}`, {
+              method: 'delete',
+              headers: {"Content-Type": "application/json"}
+            })
+            .then(() => foods())
+            .catch(error => console.log(error))
+          })
         })
         .catch(error => console.log(error))
       })
