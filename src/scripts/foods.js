@@ -12,13 +12,13 @@ $(document).ready(function() {
     })
     .then(response => response.json())
     .then(response => {
-      $('#foods').append('<button class="new-food">New</button>');
       $.each (response, function (index) {
         let link = `<h2><a class='food-show' id='${'food-'+response[index].id}' href='javascript:;'>`;
         let item = `${response[index].name}</a></h2>`;
         let cals = `<li>Cals: ${response[index].calories}</li>`;
         $("#foods").append(start + link + item + cals + close);
       })
+      $('#foods').append('<button class="new-food">New</button>');
 
       $(".new-food").on("click", function() {
         let form = `<h3>Add a new Food</h3>
