@@ -36,7 +36,9 @@ $(document).ready(function() {
           let foods = '';
           $.each (response.Food, function (index) {
             let food = response.Food[index].name;
-            foods += `<li>${food}</li>`;
+            foods += `<li>${food} `;
+            foods += `<button id="${response.Food[index].id}" `;
+            foods += `class="remove-food">Remove</button></li>`;
           })
 
           let addToMeal = ''
@@ -49,6 +51,15 @@ $(document).ready(function() {
           $("#foods").append(addToMeal);
 
           $("#meals-index").on("click", function() { meals(); });
+
+          $(".remove-food").on("click", function() {
+            fetch(`https://calorie-tracker-be.herokuapp.com/api/v1/meals/${id}/foods/${this.id}`, {
+              method: 'delete',
+              headers: {"Content-Type": "application/json"}
+            })
+            .then(() => meals())
+            .catch(error => console.log(error))
+          });
         })
       })
     })
