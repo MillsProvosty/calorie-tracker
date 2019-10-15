@@ -47,12 +47,12 @@ $(document).ready(function() {
       })
 
       $(".food-show").on("click", function() {
-        let id = $(this).attr('id').split('-')[1];
+        var id = $(this).attr('id').split('-')[1];
         fetch(`https://calorie-tracker-be.herokuapp.com/api/v1/foods/${id}`, {
           method: 'get',
           headers: {"Content-Type": "application/json"}
         })
-        .then(response => response.json())
+        .then((response) => response.json())
         .then(response => {
 					let item = `<h2>${response.name}</h2>\n`
 					let cals = `<li>Cals: ${response.calories}</li>`
@@ -61,6 +61,14 @@ $(document).ready(function() {
 					$('#foods').empty().append(start + item + cals + close + backBtn + editBtn + deleteBtn)
 
           $("#foods-index").on("click", function() { foods(); });
+          $("#delete-food").on("click", function() {
+            fetch(`https://calorie-tracker-be.herokuapp.com/api/v1/foods/${id}`, {
+              method: 'delete',
+              headers: {"Content-Type": "application/json"}
+            })
+            .then(() => foods())
+            .catch(error => console.log(error))
+          })
         })
         .catch(error => console.log(error))
       })
