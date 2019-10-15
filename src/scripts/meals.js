@@ -1,10 +1,12 @@
-
 $(document).ready(function() {
   var start = `<div class='entry' style='margin: 10px;'>\n`
   var close = `</div>`
   var backBtn = '<button id="meals-index">Back</button>'
 
   var meals = function() {
+    mealId = 0;
+    mealSelected = false;
+    foodSelected = false;
     $("#meals").empty()
 
     fetch('https://calorie-tracker-be.herokuapp.com/api/v1/meals', {
@@ -20,7 +22,9 @@ $(document).ready(function() {
       })
 
       $(".meal-show").on("click", function() {
+        mealSelected = true;
         var id = $(this).attr('id').split('-')[1];
+        mealId = id;
         fetch(`https://calorie-tracker-be.herokuapp.com/api/v1/meals/${id}/foods`, {
           method: 'get',
           headers: {"Content-Type": "application/json"}
@@ -34,8 +38,15 @@ $(document).ready(function() {
             let food = response.Food[index].name;
             foods += `<li>${food}</li>`;
           })
-          
+
+          let addToMeal = ''
+          if (foodSelected && mealSelected) {
+            addToMeal += '<button id="add-food">Add to Meal</button>';
+          }
+
           $("#meals").empty().append(start + item +  foods + close + backBtn);
+
+          $("#foods").append(addToMeal);
 
           $("#meals-index").on("click", function() { meals(); });
         })
