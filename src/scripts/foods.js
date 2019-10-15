@@ -32,12 +32,12 @@ $(document).ready(function() {
         $('#submit-new-food').submit(function(evnt) {
           evnt.preventDefault();
           input = $(this).serialize().split('&');
-      		var body = { food: { name: input[0].split("=")[1],
+      		let postBody = { food: { name: input[0].split("=")[1],
       			                   calories: input[1].split("=")[1] } }
           fetch('https://calorie-tracker-be.herokuapp.com/api/v1/foods', {
             method: 'post',
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(body)
+            body: JSON.stringify(postBody)
           })
           .then(() => foods())
           .catch(error => console.log(error))
@@ -61,6 +61,37 @@ $(document).ready(function() {
 					$('#foods').empty().append(start + item + cals + close + backBtn + editBtn + deleteBtn)
 
           $("#foods-index").on("click", function() { foods(); });
+
+          $("#edit-food").on("click", function() {
+            let form = `<h3>Edit Food</h3>
+                			  <form id='submit-edit-food'>
+                  				Name: <input type='text' name='Name' value=${response.name}><br>
+                  				Calories: <input type='text' name='Calories' value=${response.calories}>
+                					<input type='submit' value='Submit'><br>
+                				</form>`
+            $('#foods').empty().append(start + form + close + backBtn)
+
+            $('#submit-edit-food').submit(function(evnt) {
+              evnt.preventDefault();
+              input = $(this).serialize().split('&');
+          		let patchBody = { food: { name: input[0].split("=")[1],
+          			                   calories: input[1].split("=")[1] } }
+              console.log('MUH BODY')
+              console.log(JSON.stringify(patchBody))
+              console.log(JSON.stringify(patchBody.food))
+              console.log(JSON.stringify(id))
+              fetch(`https://calorie-tracker-be.herokuapp.com/api/v1/foods/${id}`, {
+                method: 'PUT',
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(patchBody)
+              })
+              .then(() => foods())
+              .catch(error => console.log(error))
+            })
+
+            $("#foods-index").on("click", function() { foods(); });
+          })
+
           $("#delete-food").on("click", function() {
             fetch(`https://calorie-tracker-be.herokuapp.com/api/v1/foods/${id}`, {
               method: 'delete',
@@ -69,6 +100,7 @@ $(document).ready(function() {
             .then(() => foods())
             .catch(error => console.log(error))
           })
+
         })
         .catch(error => console.log(error))
       })
