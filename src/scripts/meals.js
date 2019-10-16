@@ -1,12 +1,49 @@
-$(document).ready(function() {
-  var start = `<div class='entry' style='margin: 10px;'>\n`
-  var close = `</div>`
-  var backBtn = '<button id="meals-index">Back</button>'
+var start = `<div class='entry' style='margin: 10px;'>\n`
+var close = `</div>`
+var mealsIndexBtn = '<button id="meals-index">Back</button>'
 
-  var meals = function() {
+removeFood = function(id) {
+  fetch(`https://calorie-tracker-be.herokuapp.com/api/v1/meals/${mealId}/foods/${id}`, {
+    method: 'delete',
+    headers: {"Content-Type": "application/json"}
+  })
+  .then(() => showMeal())
+  .catch(error => console.log(error))
+}
+
+showMeal = function() {
+  fetch(`https://calorie-tracker-be.herokuapp.com/api/v1/meals/${mealId}/foods`, {
+    method: 'get',
+    headers: {"Content-Type": "application/json"}
+  })
+  .then(response => response.json())
+  .then(response => {
+    let item = `<h2>${response.name} - `;
+
+    let mealFoods = '';
+    let cals = 0;
+    $.each (response.Food, function (index) {
+      let food = response.Food[index];
+      mealFoods += `<li>${food.name} - ${food.calories} Calories `;
+      mealFoods += `<button id="${food.id}" `;
+      mealFoods += `class="remove-food">Remove</button></li>`;
+      cals += food.calories;
+    })
+    item += `${cals} Calories</h2>`;
+
+    if (foodId != 0 && mealId != 0) { showFood(); }
+
+    $("#meals").empty().append(start + item +  mealFoods + close + mealsIndexBtn);
+
+    $("#meals-index").on("click", function() { meals(); });
+    $("#add-food").on("click", function() { addFood(); })
+    $(".remove-food").on("click", function() { removeFood(this.id); });
+  })
+}
+
+$(document).ready(function() {
+  meals = function() {
     mealId = 0;
-    mealSelected = false;
-    foodSelected = false;
     $("#meals").empty()
 
     fetch('https://calorie-tracker-be.herokuapp.com/api/v1/meals', {
@@ -22,49 +59,11 @@ $(document).ready(function() {
       })
 
       $(".meal-show").on("click", function() {
-        mealSelected = true;
-        var id = $(this).attr('id').split('-')[1];
-        mealId = id;
-        fetch(`https://calorie-tracker-be.herokuapp.com/api/v1/meals/${id}/foods`, {
-          method: 'get',
-          headers: {"Content-Type": "application/json"}
-        })
-        .then(response => response.json())
-        .then(response => {
-          let item = `<h2>${response.name}</h2>`;
-
-          let foods = '';
-          $.each (response.Food, function (index) {
-            let food = response.Food[index].name;
-            foods += `<li>${food} `;
-            foods += `<button id="${response.Food[index].id}" `;
-            foods += `class="remove-food">Remove</button></li>`;
-          })
-
-          let addToMeal = ''
-          if (foodSelected && mealSelected) {
-            addToMeal += '<button id="add-food">Add to Meal</button>';
-          }
-
-          $("#meals").empty().append(start + item +  foods + close + backBtn);
-
-          $("#foods").append(addToMeal);
-
-          $("#meals-index").on("click", function() { meals(); });
-
-          $(".remove-food").on("click", function() {
-            fetch(`https://calorie-tracker-be.herokuapp.com/api/v1/meals/${id}/foods/${this.id}`, {
-              method: 'delete',
-              headers: {"Content-Type": "application/json"}
-            })
-            .then(() => meals())
-            .catch(error => console.log(error))
-          });
-        })
+        mealId = $(this).attr('id').split('-')[1];
+        showMeal();
       })
     })
     .catch(error => console.log(error))
   }
-
   meals();
 })
