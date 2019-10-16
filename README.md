@@ -2,11 +2,9 @@
 Calorie Tracker was a two person project built in 10 days using Javascript and Express. It includes a backend that interfaces with this app, and that repo can be found [here](https://github.com/MillsProvosty/calorie-tracker-be). The goal of this project was to create an Express API given specified endpoints and response formats, as well as integrate both front and back end apps together and complete the quantified self experience while learning JavaScript.
 
 Core Contributors:
-Jake Miller
-[Jake Miller](https://github.com/Jake0Miller)
 
-Mills Provosty
-[Mills Provosty](https://github.com/MillsProvosty)
+* [Jake Miller](https://github.com/Jake0Miller)
+* [Mills Provosty](https://github.com/MillsProvosty)
 
 
 
