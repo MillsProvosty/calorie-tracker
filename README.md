@@ -18,6 +18,13 @@ Add Food to Meal:
 ![Meal](/public/images/addfoodtomeal.png)
 
 
+### Tech Stack
+
+* Framework: Webpack(https://github.com/turingschool-examples/qs-fe-starter-kit)
+* Language: Javascript
+* Libraries: JQuery
+
+
 ### Initial Setup:
 
 * `$ git clone https://github.com/MillsProvosty/calorie-tracker`
