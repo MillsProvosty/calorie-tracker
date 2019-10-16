@@ -7,6 +7,13 @@ module.exports = {
   entry: {
     app: Path.resolve(__dirname, '../src/scripts/index.js')
   },
+  devServer: {
+    port: process.env.PORT || 3000,
+    host: '0.0.0.0',
+    compress: true,
+    inline: true,
+    disableHostCheck: true
+  },
   output: {
     path: Path.join(__dirname, '../build'),
     filename: 'js/[name].js'
