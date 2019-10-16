@@ -24,6 +24,12 @@
     "url": "https://github.com/wbkd/webpack-starter/issues"
   },
   "devDependencies": {
+
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.6.0",
+    "core-js": "^3.2.1",
+    "jquery": "^3.4.1",
     "@babel/core": "^7.6.4",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
@@ -44,10 +50,5 @@
     "webpack-cli": "^3.3.9",
     "webpack-dev-server": "^3.8.2",
     "webpack-merge": "^4.2.2"
-  },
-  "dependencies": {
-    "@babel/polyfill": "^7.6.0",
-    "core-js": "^3.2.1",
-    "jquery": "^3.4.1"
   }
 }
