@@ -18,15 +18,18 @@ showMeal = function() {
   })
   .then(response => response.json())
   .then(response => {
-    let item = `<h2>${response.name}</h2>`;
+    let item = `<h2>${response.name} - `;
 
     let mealFoods = '';
+    let cals = 0;
     $.each (response.Food, function (index) {
-      let food = response.Food[index].name;
-      mealFoods += `<li>${food} `;
-      mealFoods += `<button id="${response.Food[index].id}" `;
+      let food = response.Food[index];
+      mealFoods += `<li>${food.name} - ${food.calories} Calories `;
+      mealFoods += `<button id="${food.id}" `;
       mealFoods += `class="remove-food">Remove</button></li>`;
+      cals += food.calories;
     })
+    item += `${cals} Calories</h2>`;
 
     if (foodId != 0 && mealId != 0) { showFood(); }
 
