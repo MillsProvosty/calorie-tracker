@@ -35,12 +35,9 @@ Add Food to Meal:
 
 [Project Board](https://github.com/MillsProvosty/calorie-tracker/projects/1)
 
-Front End :
-Heroku Link : https://calorie-tracker-js.herokuapp.com/
+[Front End Heroku Link](https://calorie-tracker-js.herokuapp.com/)
 
-
-Backend:
-Heroku Link : https://calorie-tracker-be.herokuapp.com/
+[Back End Heroku Link](https://calorie-tracker-be.herokuapp.com/)
 
 
 ### How to contribute
